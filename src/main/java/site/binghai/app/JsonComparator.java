@@ -36,6 +36,11 @@ public class JsonComparator implements Apps {
         System.out.println(rs.toString());
     }
 
+    @Override
+    public String getName() {
+        return "jsonc";
+    }
+
     private void cmp(String k, JSONObject b, JSONObject cmp) {
         rs.append(cmp.containsKey(k) ? (cmp.get(k).equals(b.get(k)) ? "" : k + " 对比失败 " + b.get(k) + " -> " + cmp.get(k) + "\n") : k + " 不存在\n");
     }

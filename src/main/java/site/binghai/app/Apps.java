@@ -7,4 +7,5 @@ package site.binghai.app;
  */
 public interface Apps {
     void invokeFunction(String[] args);
+    String getName();
 }
