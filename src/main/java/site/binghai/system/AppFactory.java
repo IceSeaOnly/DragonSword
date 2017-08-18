@@ -1,10 +1,10 @@
 package site.binghai.system;
 
 import site.binghai.app.Apps;
+import site.binghai.utils.ClassUtils;
+
 import java.io.File;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by binghai on 2017/8/17.
@@ -15,7 +15,7 @@ public class AppFactory {
     private static HashMap<String,Apps> appPool = new HashMap<>();
     static {
         List<String> classNames = listClasses();
-        classNames.stream().forEach(v->instanceClass(v.substring(0,v.length()-6)));
+        classNames.stream().forEach(v->instanceClass(v));
     }
 
     private static void instanceClass(String v) {
@@ -37,9 +37,7 @@ public class AppFactory {
     }
 
     private static List<String> listClasses() {
-        String rootPath = Core.getResourcePath("/site/binghai/app/");
-        List<String> rs = Arrays.asList(new File(rootPath).list());
-        return rs;
+        return ClassUtils.classUnderPackage("site.binghai.app");
     }
 
     public static Apps getAppByName(String appName){

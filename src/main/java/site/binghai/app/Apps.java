@@ -1,5 +1,7 @@
 package site.binghai.app;
 
+import site.binghai.system.Param;
+
 /**
  * Created by binghai on 2017/8/16.
  *
@@ -7,7 +9,7 @@ package site.binghai.app;
  */
 
 public interface Apps {
-    void invokeFunction(String[] args);
+    void invokeFunction(Param args);
     String[] getName();
     void help();
 }

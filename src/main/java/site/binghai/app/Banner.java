@@ -1,6 +1,7 @@
 package site.binghai.app;
 
 import site.binghai.system.Core;
+import site.binghai.system.Param;
 
 import static site.binghai.system.Core.msgOut;
 
@@ -12,7 +13,7 @@ import static site.binghai.system.Core.msgOut;
  */
 public class Banner implements Apps {
     @Override
-    public void invokeFunction(String[] args) {
+    public void invokeFunction(Param args) {
         Core.shwoBanner();
     }
 

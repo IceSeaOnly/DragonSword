@@ -2,6 +2,7 @@ package site.binghai.app;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.Assert;
+import site.binghai.system.Param;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,18 +22,18 @@ public class JsonComparator implements Apps {
     private StringBuilder rs = new StringBuilder();
 
     @Override
-    public void invokeFunction(String[] args) {
-        if (args.length < 2) {
+    public void invokeFunction(Param args) {
+        if (args.getArgSize() < 2) {
             msgOut("必须传入两个json文件的路径！");
         }
-        File base = new File(args[0]);
-        File cmps = new File(args[1]);
+        File base = new File(args.getValByIndex(1));
+        File cmps = new File(args.getValByIndex(2));
 
         JSONObject b = JSONObject.parseObject(getObjectString(base));
         JSONObject c = JSONObject.parseObject(getObjectString(cmps));
 
-        Assert.notNull(b, args[0] + "文件不存在");
-        Assert.notNull(c, args[1] + "文件不存在");
+        Assert.notNull(b, args.getValByIndex(1) + "文件不存在");
+        Assert.notNull(c, args.getValByIndex(2) + "文件不存在");
 
         b.keySet().stream().forEach(v -> cmp(v, b, c));
         msgOut(rs.toString());

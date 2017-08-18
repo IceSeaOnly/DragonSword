@@ -1,7 +1,6 @@
 package site.binghai.system;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 /**
@@ -11,15 +10,13 @@ import java.util.Scanner;
  */
 public class Core {
     public static void shwoBanner() {
-        String fpath = getResourcePath("/banner.txt");
+        InputStream fpath= getResourcePath("/banner.txt");
         Scanner sc = null;
         try {
-            sc = new Scanner(new FileInputStream(fpath));
+            sc = new Scanner(fpath);
             while (sc.hasNextLine()) {
                 System.out.println(sc.nextLine());
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } finally {
             sc.close();
         }
@@ -29,7 +26,7 @@ public class Core {
         System.out.println(msg);
     }
 
-    public static String getResourcePath(String sname){
-        return Core.class.getResource(sname.startsWith("/") ? sname : "/"+sname).getPath();
+    public static InputStream getResourcePath(String sname){
+        return Core.class.getResourceAsStream(sname.startsWith("/") ? sname : "/"+sname);
     }
 }

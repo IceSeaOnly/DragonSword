@@ -2,6 +2,8 @@ package site.binghai;
 
 import site.binghai.app.Apps;
 import site.binghai.system.AppFactory;
+import site.binghai.system.Param;
+
 import static site.binghai.system.Core.msgOut;
 import static site.binghai.system.Core.shwoBanner;
 
@@ -12,25 +14,20 @@ public class DragonSwordApplication {
         if (args.length < 1) {
             shwoBanner();
             msgOut("没有输入任何命令");
+            return;
         }
+        Param param = new Param(args);
         Apps app = AppFactory.getAppByName(args[0]);
         if (app == null) {
             msgOut("这个应用不存在");
         } else {
-            if (needHelp(args)) {
+            if (param.needHelp()) {
                 app.help();
             } else {
-                app.invokeFunction(args);
+                app.invokeFunction(param);
             }
         }
     }
 
-    private static boolean needHelp(String[] args) {
-        for (String arg : args) {
-            if (arg.toLowerCase().equals("-h") || arg.toLowerCase().equals("-help")) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 }
