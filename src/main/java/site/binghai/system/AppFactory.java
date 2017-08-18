@@ -19,12 +19,14 @@ public class AppFactory {
     }
 
     private static void instanceClass(String v) {
-        if (v.equals("Apps.class"));
+        if (v.equals("Apps")){
+            return;
+        }
         String pkg = "site.binghai.app.";
         try {
             Class<Apps> appClazz = (Class<Apps>) Class.forName(pkg+v);
-            appClazz.newInstance();
-
+            Apps app = appClazz.newInstance();
+            Arrays.stream(app.getName()).forEach(e -> appPool.put(e,app));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

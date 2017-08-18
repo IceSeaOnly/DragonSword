@@ -5,7 +5,9 @@ package site.binghai.app;
  *
  * @ MoGuJie
  */
+
 public interface Apps {
     void invokeFunction(String[] args);
-    String getName();
+    String[] getName();
+    void help();
 }

@@ -12,7 +12,8 @@ import static org.junit.Assert.*;
 public class AppFactoryTest {
     @Test
     public void getAppByName() throws Exception {
-        AppFactory.getAppByName("a");
+        AppFactory.getAppByName("banner").help();
+        AppFactory.getAppByName("Banner").help();
     }
 
 }

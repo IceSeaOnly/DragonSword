@@ -8,6 +8,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import static site.binghai.system.Core.msgOut;
+
 /**
  * Created by binghai on 2017/8/16.
  * JSON比较器
@@ -21,7 +23,7 @@ public class JsonComparator implements Apps {
     @Override
     public void invokeFunction(String[] args) {
         if (args.length < 2) {
-            System.out.println("必须传入两个json文件的路径！");
+            msgOut("必须传入两个json文件的路径！");
         }
         File base = new File(args[0]);
         File cmps = new File(args[1]);
@@ -33,12 +35,17 @@ public class JsonComparator implements Apps {
         Assert.notNull(c, args[1] + "文件不存在");
 
         b.keySet().stream().forEach(v -> cmp(v, b, c));
-        System.out.println(rs.toString());
+        msgOut(rs.toString());
     }
 
     @Override
-    public String getName() {
-        return "jsonc";
+    public String[] getName() {
+        return new String[]{"jsonc"};
+    }
+
+    @Override
+    public void help() {
+        msgOut("this is help of JsonComparator");
     }
 
     private void cmp(String k, JSONObject b, JSONObject cmp) {
@@ -60,7 +67,7 @@ public class JsonComparator implements Apps {
         } finally {
             sc.close();
         }
-        System.out.println("解析" + f.getAbsolutePath() + " 时出现异常");
+        msgOut("解析" + f.getAbsolutePath() + " 时出现异常");
         return null;
     }
 
