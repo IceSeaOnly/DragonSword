@@ -54,7 +54,7 @@ public class NetKiller implements Apps {
         String[] params = param.split(" ");
         if (params.length > 0) {
             for (String hold : params) {
-                baseUrl = baseUrl.replaceFirst("<?>", hold);
+                baseUrl = baseUrl.replaceFirst("<#>", hold);
             }
         } else {
             msgOut(String.format("第%s行没有参数", line));
@@ -97,7 +97,7 @@ public class NetKiller implements Apps {
     public void help() {
         msgOut("网络自动发生器,目前仅支持GET，应用名：netkiller,nk,NetKiller,netkill,参数：");
         msgOut(" -f fileName 指定参数文件名,每行参数以空格分隔,与url中的待替换参数列对应");
-        msgOut(" -u url 设置url，<?>作占位符被文件内的参数替换,例如http://binghai.site?username=<?>&age=<?>");
+        msgOut(" -u url 设置url，<#> 作占位符被文件内的参数替换,例如http://binghai.site?username=<?>&age=<?>");
         msgOut(" -r 10 重复10次");
         msgOut(" -o fileName 直接访问文本文件内的每个url");
     }
