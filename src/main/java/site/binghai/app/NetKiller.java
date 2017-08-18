@@ -28,9 +28,9 @@ public class NetKiller implements Apps {
             String baseUrl = param.getVal("-u");
             Assert.notNull(baseUrl, "需要 -u 指定url");
             if (param.hasKey("-f")) {
-                joinUrl(baseUrl,param.getVal("-f"),StringUtils.getInt(param.getVal("-r"), 1));
+                joinUrl(baseUrl, param.getVal("-f"), StringUtils.getInt(param.getVal("-r"), 1));
             } else {
-                byUrl(baseUrl,StringUtils.getInt(param.getVal("-r"), 1));
+                byUrl(baseUrl, StringUtils.getInt(param.getVal("-r"), 1));
             }
         }
     }
@@ -40,31 +40,31 @@ public class NetKiller implements Apps {
         try {
             sc = new Scanner(new FileInputStream(filePath));
             int line = 0;
-            while (sc.hasNextLine()){
-                byJoinUrl(line++,baseUrl,sc.nextLine(),repeat);
+            while (sc.hasNextLine()) {
+                byJoinUrl(line++, baseUrl, sc.nextLine(), repeat);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             sc.close();
         }
     }
 
-    private void byJoinUrl(int line,String baseUrl, String param, int repeat) {
+    private void byJoinUrl(int line, String baseUrl, String param, int repeat) {
         String[] params = param.split(" ");
-        if(params.length > 0){
-            for(String hold : params){
-                baseUrl = baseUrl.replaceFirst("<?>",hold);
+        if (params.length > 0) {
+            for (String hold : params) {
+                baseUrl = baseUrl.replaceFirst("<?>", hold);
             }
-        }else{
-            msgOut(String.format("第%s行没有参数",line));
+        } else {
+            msgOut(String.format("第%s行没有参数", line));
         }
-        byUrl(baseUrl,repeat);
+        byUrl(baseUrl, repeat);
     }
 
     private void byUrl(String url, int repeat) {
         while (repeat-- > 0) {
-            msgOut(HttpUtil.sendGet(url));
+            msgOut(url + " : " + HttpUtil.sendGet(url));
         }
     }
 
