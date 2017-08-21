@@ -6,6 +6,8 @@ import site.binghai.utils.ClassUtils;
 import java.io.File;
 import java.util.*;
 
+import static site.binghai.system.Core.msgOut;
+
 /**
  * Created by binghai on 2017/8/17.
  *
@@ -42,5 +44,13 @@ public class AppFactory {
 
     public static Apps getAppByName(String appName){
         return appPool.get(appName);
+    }
+
+    public static void listAll() {
+        msgOut("应用列表：");
+        int i = 1;
+        for(String name : listClasses()){
+            msgOut(" "+(i++)+". "+name);
+        }
     }
 }

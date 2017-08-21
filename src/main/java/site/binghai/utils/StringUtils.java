@@ -18,4 +18,13 @@ public class StringUtils {
     public static Object getVal(Object val,Object Default){
         return val == null ? Default : val;
     }
+
+    public static boolean valIn(String cur,String...param){
+        for(String s : param){
+            if(s.equals(cur)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
