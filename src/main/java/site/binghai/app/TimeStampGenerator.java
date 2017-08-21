@@ -16,6 +16,10 @@ import static site.binghai.system.Core.msgOut;
 public class TimeStampGenerator implements Apps {
     @Override
     public void invokeFunction(Param param) {
+        if(param.hasKey("-o")){
+            msgOut(TimeUtil.format(Long.parseLong(param.getVal("-o"))));
+            return;
+        }
         String curDate = (String) StringUtils.getVal(param.getVal("-t"), TimeUtil.format(System.currentTimeMillis()));
         String formater = (String) StringUtils.getVal(param.getVal("-f"), "yyyy-MM-dd hh:mm:ss");
         Long curTS = TimeUtil.formatByFormatter(curDate, formater);
@@ -35,6 +39,7 @@ public class TimeStampGenerator implements Apps {
     public void help() {
         msgOut("时间戳产生器");
         msgOut(" 无参数传入时，打印当前时间戳");
+        msgOut(" -o，传入时间戳，格式化成yyyy-MM-dd hh:mm:ss输出");
         msgOut(" -s，打印当前短时间戳，及时间戳/1000");
         msgOut(" -t，传入时间，默认格式2016-01-01 00:00:00,其他格式必须使用-f指明");
         msgOut(" -f，传入时间格式，例如yyyy-MM-dd hh:mm:ss");
