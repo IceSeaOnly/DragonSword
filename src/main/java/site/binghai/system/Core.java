@@ -22,7 +22,7 @@ public class Core {
         }
     }
 
-    public static void msgOut(String msg){
+    public static void msgOut(Object msg){
         System.out.println(msg);
     }
 

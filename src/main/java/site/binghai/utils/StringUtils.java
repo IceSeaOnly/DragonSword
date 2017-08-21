@@ -14,4 +14,8 @@ public class StringUtils {
         }
         return Default;
     }
+
+    public static Object getVal(Object val,Object Default){
+        return val == null ? Default : val;
+    }
 }
