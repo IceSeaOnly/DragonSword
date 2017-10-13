@@ -50,8 +50,13 @@ public class JsonComparator implements Apps {
     }
 
     private void cmp(String k, JSONObject b, JSONObject cmp) {
-        rs.append(cmp.containsKey(k) ? (cmp.get(k).equals(b.get(k)) ? "" : k + " 对比失败 " + b.get(k) + " -> " + cmp.get(k) + "\n") : k + " 不存在\n");
+        rs.append(cmp.containsKey(k) ? (isEqual(cmp.get(k),b.get(k)) ? "" : k + " 对比失败 " + b.get(k) + " -> " + cmp.get(k) + "\n") : k + " 不存在\n");
     }
+
+    private boolean isEqual(Object o, Object b) {
+        return String.valueOf(o).equals(String.valueOf(b));
+    }
+
 
     private String getObjectString(File f) {
         Scanner sc = null;
